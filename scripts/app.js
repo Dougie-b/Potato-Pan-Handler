@@ -8,7 +8,8 @@ function init (){
   const cells = [] // empty array to store our divs that we create 
 
   const blockClass = 'block' // define the class of the block
-  const blockStartPosition = 4 && 13 && 22 && 31 && 40 && 49 && 58 // starting position of the block (refers to an index)
+  // const blockType = [q, w, e, r] // different identifiers for block types
+  const blockStartPosition = 4  // starting position of the block (refers to an index) Would like to start with the column filled
   let blockCurrentPosition = 4 // use let to track where the block currently is (refers to an index)
 
 
@@ -22,12 +23,28 @@ function init (){
     }
     addBlock([blockStartPosition]) 
   }
-  // * Add block(mouse for now) to grid
+
+
+  // function to spawn new block
+  // function createBlock(){
+
+  // }
+
+
+
+
+  // * function to assign a class to the block 
+  // function assignBlock(){
+
+
+  // }
+
+  // * Add block(mouse for now) to grid -- for moving blocks after spawn
   function addBlock (position) { // takes argument so function is reusable
-    cells[position].classList.add(blockClass) // use position as index to pick the corresponding div from the array of cells and add the class of cat
+    cells[position].classList.add(blockClass) // use position as index to pick the corresponding div from the array of cells and add the class of block
   }
 
-  // * Remove block(mouse for now) from the grid
+  // * Remove block(mouse for now) from the grid -- for moving blocks after spawn
   function removeBlock(position) {
     cells[position].classList.remove(blockClass)
   }
@@ -41,8 +58,8 @@ function init (){
     removeBlock(blockCurrentPosition) // remove the cat from its current position
     
     // will need an if statement extra for when the wrong key is pressed. Will have to change the (key ===) to match the appropriate key for the block in the final position
-    if (key === down && blockCurrentPosition + width < cellCount - 28) { // if the down arrow is pressed and the cat is not on the bottom row
-      blockCurrentPosition += width // redefine cat position index to be previous position plus width
+    if (key === down && blockCurrentPosition + width < cellCount - 28) { // if the down arrow is pressed and the block is not on the (desired) bottom row
+      blockCurrentPosition += width // redefine block position index to be previous position plus width to go down one row
     } else if (key === down && blockCurrentPosition + width > cellCount - 27) {
       blockCurrentPosition -= 2
     } else if (key === down && blockCurrentPosition === 54) {
