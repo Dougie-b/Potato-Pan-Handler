@@ -32,16 +32,23 @@ body {
   width: 11.11111111% 
 }
 
-.grid div.block {
+.grid div.q {
   background-image: url('../assets/Mr.Stealyourgirl.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 
-/* .grid div.block {
+.grid div.w {
   background-image: url('../assets/Mr.Flipyourgirl.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
-} */
+}
+
+.grid div.char {
+  background-image: url('../assets/character.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}

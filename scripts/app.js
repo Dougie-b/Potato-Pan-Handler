@@ -7,7 +7,9 @@ function init (){
   const cellCount = width * height // define the number of cells on the grid
   const cells = [] // empty array to store our divs that we create 
 
-  const blockClass = 'block' // define the class of the block
+  const blockClassArray = ['q', 'w', 'e', 'r']
+  const blockClass = blockClassArray[Math.floor(Math.random() * blockClassArray.length)]
+  const charClass = 'char'
   // const blockType = [q, w, e, r] // different identifiers for block types
   const blockStartPosition = 4  // starting position of the block (refers to an index) Would like to start with the column filled
   let blockCurrentPosition = 4 // use let to track where the block currently is (refers to an index)
@@ -21,14 +23,22 @@ function init (){
       grid.appendChild(cell) // make the cell a child of the grid element we grabbed above
       cells.push(cell) // add the newly created div into our empty array
     }
-    addBlock([blockStartPosition]) 
+    createBlock()
+    addCharacter()
+  }
+
+  // function to spawn character
+  function addCharacter() {
+    cells[59].classList.add(charClass)
   }
 
 
-  // function to spawn new block
-  // function createBlock(){
 
-  // }
+
+  // function to spawn new block
+  function createBlock(){
+    cells[4].classList.add(blockClass)
+  }
 
 
 
@@ -67,6 +77,7 @@ function init (){
     } 
     console.log('POSITION AFTER REDEFINING --->', blockCurrentPosition)
     addBlock(blockCurrentPosition) // add cat to the new position that was defined in the if statement above
+    createBlock()
   }
 
 
