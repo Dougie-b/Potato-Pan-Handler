@@ -70,3 +70,16 @@ Many many many small cells in grid (and coordinates for blocks rather than fixed
 Would love to implement multi-player. Could it be relatively simple for this game in that it would basically just be a mirror of the game except with different key inputs?
 
 super unrealistic goal - co-operative multi player (also need to figure out mechanics for it first)
+
+
+
+questions!
+
+how to target each cell with blockClass (q/w/e/r) with add & remove functions
+
+
+next steps:
+
+add starting overlay & end screen overlay (enter name, start game) / (score & high scores)
+add restart button somewhere
+define game end after 100 blocks

@@ -75,11 +75,17 @@ body {
 }
 
 .grid div.timer {
+  display: flex;
   background-color: black;
-  color: red
+  color: red;
+  justify-content: center;
+  align-items: center;
 }
 
 .grid div.blocksBroken {
+  display: flex;
   background-color: royalblue;
   color: pink;
+  justify-content: center;
+  align-items: center;
 }

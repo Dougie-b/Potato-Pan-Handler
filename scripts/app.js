@@ -60,7 +60,7 @@ function init (){
   function addCharacter() {
     cells[59].classList.add(charClass)
   }
-
+  // function to switch character image on keydown
   function addCharacter2() {
     cells[59].classList.remove(charClass)
     cells[59].classList.add(charClass2)
@@ -82,11 +82,16 @@ function init (){
     cells[position].classList.remove(blockClass)
   }
 
-
+  // function to toggle in second character class & add a new block at the start position (tho not yet D:)
   function handleKeyDown() {
     addCharacter2()
+    addBlock(blockStartPosition)
   }
 
+
+  // for (let i = 0; i < cars.length; i++) {
+  //   text += cars[i] + "<br>";
+  // }
 
   function handleKeyUp(event) {
     const key = event.keyCode // store the event.keyCode in a variable to save us repeatedly typing it out
@@ -112,7 +117,7 @@ function init (){
         blockCurrentPosition -= 2
         incrementBlocksBroken()
       } else {
-        console.log('wrong key!')
+        blockCurrentPosition += width
       }
     } else if (blockCurrentPosition === 56) {
       blockCurrentPosition -= 2
