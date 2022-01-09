@@ -9,7 +9,8 @@ function init (){
 
   const blockClassArray = ['q', 'w', 'e', 'r'] // array of block classes to randomly assign on spawn
   const blockClass = blockClassArray[Math.floor(Math.random() * blockClassArray.length)] //maths to randomise the class selection
-  const charClass = 'char' //character class 
+  const charClass = 'char' //character class
+  const charClass2 = 'char2' 
   const blockStartPosition = 4  // starting position of the block (refers to an index) Would like to start with the column filled
   let blockCurrentPosition = 4 // use let to track where the block currently is (refers to an index)
 
@@ -32,22 +33,16 @@ function init (){
     cells[59].classList.add(charClass)
   }
 
+  function addCharacter2() {
+    cells[59].classList.remove(charClass)
+    cells[59].classList.add(charClass2)
+  }
 
+  function removeCharacter() {
+    cells[59].classList.remove(charClass)
+    cells[59].classList.remove(charClass2)
+  }
 
-
-  //function to spawn new block
-  // function startBlock(){
-  //   cells[4 && 13 && 22 && 31 && 40 && 49 && 58].classList.add(blockClass)
-  // }
-
-
-
-
-  // * function to assign a class to the block 
-  // function assignBlock(){
-
-
-  // }
 
   // * Add block(mouse for now) to grid -- for moving blocks after spawn
   function addBlock (position) { // takes argument so function is reusable
@@ -59,29 +54,11 @@ function init (){
     cells[position].classList.remove(blockClass)
   }
 
-  // move blocks down when key is pressed
 
-  // function handleKeyUp(event) {
-  //   const key = event.keyCode // store the event.keyCode in a variable to save us repeatedly typing it out
-  //   const q = 81
-  //   const w = 87
-  //   const e = 69
-  //   const r = 82
-  //   console.log('POSITION BEFORE REDEFINING --->', blockCurrentPosition)
-  //   removeBlock(blockCurrentPosition) // remove the block from its current position
-    
-  //   // will need an if statement extra for when the wrong key is pressed. Will have to change the (key ===) to match the appropriate key for the block in the final position
-  //   if (key === q === blockClass[1] && blockCurrentPosition + width < cellCount - 28) { // if the down arrow is pressed and the block is not on the (desired) bottom row
-  //     blockCurrentPosition += width // redefine block position index to be previous position plus width to go down one row
-  //   } else if (key === q === blockClass[1] && blockCurrentPosition + width > cellCount - 27) { // if q is pressed and the block
-  //     blockCurrentPosition -= 2
-  //   } else if (key === q && blockCurrentPosition === 54) {
-  //     cells[54].classList.remove(blockClass)
-  //   } 
-  //   console.log('POSITION AFTER REDEFINING --->', blockCurrentPosition)
-  //   addBlock(blockCurrentPosition) // add block to the new position that was defined in the if statement above
-  //   createBlock()
-  // }
+  function handleKeyDown() {
+    addCharacter2()
+  }
+
 
   function handleKeyUp(event) {
     const key = event.keyCode // store the event.keyCode in a variable to save us repeatedly typing it out
@@ -112,11 +89,15 @@ function init (){
     if (blockCurrentPosition === 54) {
       removeBlock(blockCurrentPosition)
     }
+    removeCharacter()
+    addCharacter()
   }
 
 
 
   document.addEventListener('keyup', handleKeyUp) // listening for key press
+  document.addEventListener('keydown', handleKeyDown)
+  
   createGrid(blockStartPosition) 
 
 }
