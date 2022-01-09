@@ -73,3 +73,13 @@ body {
   background-size: contain;
   cursor: pointer;
 }
+
+.grid div.timer {
+  background-color: black;
+  color: red
+}
+
+.grid div.blocksBroken {
+  background-color: royalblue;
+  color: pink;
+}

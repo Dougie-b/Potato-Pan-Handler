@@ -6,6 +6,10 @@ function init (){
   const height = 10
   const cellCount = width * height // define the number of cells on the grid
   const cells = [] // empty array to store our divs that we create 
+  const blocksBrokenClass = 'blocksBroken'
+  let blocksBroken = 0
+  const timerClass = 'timer'
+  let seconds = 0
 
   const blockClassArray = ['q', 'w', 'e', 'r'] // array of block classes to randomly assign on spawn
   const blockClass = blockClassArray[Math.floor(Math.random() * blockClassArray.length)] //maths to randomise the class selection
@@ -26,6 +30,30 @@ function init (){
     //createBlock()
     addBlock(blockStartPosition)
     addCharacter()
+    createTimer()
+    createBlocksBrokenCount()
+  }
+
+  // timer function
+  function startTimer(){
+    seconds += 1
+    cells[8].innerHTML = seconds
+  }
+
+  function createTimer(){
+    setInterval(startTimer, 1000)
+    cells[8].classList.add(timerClass)
+  }
+
+  // blocks broken correct counter
+  function createBlocksBrokenCount() {
+    cells[17].classList.add(blocksBrokenClass)
+    cells[17].innerText = blocksBroken
+  }
+
+  function incrementBlocksBroken(){
+    blocksBroken += 1
+    cells[17].innerText = blocksBroken
   }
 
   // function to spawn character
@@ -73,12 +101,16 @@ function init (){
     } else if (blockCurrentPosition === 58) {
       if (key === q && blockClass === 'q') {
         blockCurrentPosition -= 2
+        incrementBlocksBroken()
       } else if (key === w && blockClass === 'w'){
         blockCurrentPosition -= 2
+        incrementBlocksBroken()
       } else if (key === e && blockClass === 'e') {
         blockCurrentPosition -= 2
+        incrementBlocksBroken()
       } else if (key === r && blockClass === 'r') {
         blockCurrentPosition -= 2
+        incrementBlocksBroken()
       } else {
         console.log('wrong key!')
       }
@@ -91,8 +123,8 @@ function init (){
     }
     removeCharacter()
     addCharacter()
+    console.log(blocksBroken)
   }
-
 
 
   document.addEventListener('keyup', handleKeyUp) // listening for key press
