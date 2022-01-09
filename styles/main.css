@@ -46,6 +46,20 @@ body {
   cursor: pointer;
 }
 
+.grid div.e {
+  background-color: red;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.grid div.r {
+  background-color: blue;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
 .grid div.char {
   background-image: url('../assets/character.png');
   background-repeat: no-repeat;
