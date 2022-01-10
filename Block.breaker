@@ -75,11 +75,14 @@ super unrealistic goal - co-operative multi player (also need to figure out mech
 
 questions!
 
-how to target each cell with blockClass (q/w/e/r) with add & remove functions
+how to continously spawn new blocks up top (to a limit)
+and target them all with the move block commands
 
+necessary next steps:
 
-next steps:
-
+MAKE MORE BLOCKS PLEASE
 add starting overlay & end screen overlay (enter name, start game) / (score & high scores)
 add restart button somewhere
 define game end after 100 blocks
+add sounds for background music and on breaking block right/wrong
+Do some stylin
