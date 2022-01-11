@@ -18,8 +18,9 @@ function init (){
   const charClass = 'char' //character class
   const charClass2 = 'char2' 
   // const blockStartPosition = 4 // starting position of the block (refers to an index) Would like to start with the column filled
-  let blockCurrentPosition = 4 // use let to track where the block currently is (refers to an index)
+  let blockCurrentPositions = [4, 13, 22, 31, 40, 49, 58] // use let to track where the block currently is (refers to an index)
   // let blockColumnPosition = 4 || 13 || 22 || 31 || 40 || 49 || 58 an attempt to make the block moving function handle all boxes
+  // const blockColumn = [cells[4], cells[13], cells[22], cells[31], cells[40], cells[49]]
   
   // why does blockColumn not work for createBlocks? tried a few different things
 
@@ -32,13 +33,9 @@ function init (){
       cells.push(cell) // add the newly created div into our empty array
     }
     // addBlock(blockStartPosition)
-    createBlocks(4)
-    createBlocks(13)
-    createBlocks(22)
-    createBlocks(31)
-    createBlocks(40)
-    createBlocks(49)
-    createBlocks(58)
+    for (let i = 0; i < blockCurrentPositions.length; i++) {
+      createBlock(blockCurrentPositions[i])
+    }
     addCharacter()
     createTimer()
     createBlocksBrokenCount()
@@ -94,7 +91,7 @@ function init (){
 
 
   // create & randomise blocks
-  function createBlocks(position) {
+  function createBlock(position) {
     cells[position].classList.add(blockClassArray[Math.floor(Math.random() * blockClassArray.length)])
   }
 
@@ -108,7 +105,7 @@ function init (){
     cells[position].classList.remove(blockClass)
   }
 
-  // function to toggle in second character class & add a new block at the start position (tho not yet D:)
+
   function handleKeyDown(event) {
     const key = event.keyCode // store the event.keyCode in a variable to save us repeatedly typing it out
     const q = 81
@@ -116,37 +113,35 @@ function init (){
     const e = 69
     const r = 82
 
-    removeBlock(blockCurrentPosition)
-    if (blockCurrentPosition + width < cellCount - 28) {
-      blockCurrentPosition += width
-      
-    } else if (blockCurrentPosition === 58) {
+    removeBlock(blockCurrentPositions)
+    if (blockCurrentPositions + width < cellCount - 28) {
+      blockCurrentPositions += width      
+    } else if (blockCurrentPositions === 58) {
       if (key === q && blockClass === 'q') {
-        blockCurrentPosition -= 2
+        blockCurrentPositions -= 2
         incrementBlocksBroken()
       } else if (key === w && blockClass === 'w'){
-        blockCurrentPosition -= 2
+        blockCurrentPositions -= 2
         incrementBlocksBroken()
       } else if (key === e && blockClass === 'e') {
-        blockCurrentPosition -= 2
+        blockCurrentPositions -= 2
         incrementBlocksBroken()
       } else if (key === r && blockClass === 'r') {
-        blockCurrentPosition -= 2
+        blockCurrentPositions -= 2
         incrementBlocksBroken()
       } else {
-        blockCurrentPosition += width
+        blockCurrentPositions += width
         incrementBlocksFailed()
       }
-    } else if (blockCurrentPosition === 56) {
-      blockCurrentPosition -= 2
+    } else if (blockCurrentPositions === 56) {
+      blockCurrentPositions -= 2
     }
-    addBlock(blockCurrentPosition)
-    if (blockCurrentPosition === 54) {
-      removeBlock(blockCurrentPosition)
+    addBlock(blockCurrentPositions)
+    if (blockCurrentPositions === 54) {
+      removeBlock(blockCurrentPositions)
     }
     addCharacter2()
   }
-
 
   // for (let i = 0; i < cars.length; i++) {
   //   text += cars[i] + "<br>";
@@ -158,12 +153,10 @@ function init (){
     //createBlocks(4)
   }
 
-
   document.addEventListener('keyup', handleKeyUp) // listening for key press
   document.addEventListener('keydown', handleKeyDown)
   
   createGrid() 
-
 }
 
 window.addEventListener('DOMContentLoaded', init)
