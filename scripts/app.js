@@ -18,7 +18,7 @@ function init (){
   const charClass = 'char' //character class
   const charClass2 = 'char2' 
   // const blockStartPosition = 4 // starting position of the block (refers to an index) Would like to start with the column filled
-  let blockCurrentPositions = [4, 13, 22, 31, 40, 49, 58] // use let to track where the block currently is (refers to an index)
+  let blockCurrentPositions = [58, 49, 40, 31, 22, 13, 4] // use let to track where the block currently is (refers to an index)
   // let blockColumnPosition = 4 || 13 || 22 || 31 || 40 || 49 || 58 an attempt to make the block moving function handle all boxes
   // const blockColumn = [cells[4], cells[13], cells[22], cells[31], cells[40], cells[49]]
   
@@ -113,33 +113,52 @@ function init (){
     const e = 69
     const r = 82
 
-    removeBlock(blockCurrentPositions)
-    if (blockCurrentPositions + width < cellCount - 28) {
-      blockCurrentPositions += width      
-    } else if (blockCurrentPositions === 58) {
-      if (key === q && blockClass === 'q') {
-        blockCurrentPositions -= 2
-        incrementBlocksBroken()
-      } else if (key === w && blockClass === 'w'){
-        blockCurrentPositions -= 2
-        incrementBlocksBroken()
-      } else if (key === e && blockClass === 'e') {
-        blockCurrentPositions -= 2
-        incrementBlocksBroken()
-      } else if (key === r && blockClass === 'r') {
-        blockCurrentPositions -= 2
-        incrementBlocksBroken()
-      } else {
-        blockCurrentPositions += width
-        incrementBlocksFailed()
-      }
-    } else if (blockCurrentPositions === 56) {
-      blockCurrentPositions -= 2
-    }
-    addBlock(blockCurrentPositions)
-    if (blockCurrentPositions === 54) {
-      removeBlock(blockCurrentPositions)
-    }
+    // define an array of the classes in the blockCurrentPositions 
+    const columnArray = blockCurrentPositions.map(position => {
+      return cells[position].classList.value
+    })
+    // const columnArray = [blockCurrentPositions.classList.value]
+    console.log(columnArray)
+
+    // shift items down the array and put back to move down a row && make new block at top & push it to array (ARRAY LENGTHS MUST MATCH (columnArray/blockStartingPositions))
+    // use foreach to update each element in the columnArray (pushing them down the array so they go down the rows on grid)
+    // will need to push in a new createBlock randomiser value for cell 4
+    // define function to move the final block depending on correct/incorrect input
+    console.log(blockCurrentPositions)
+    
+
+    // console.log(columnArray)
+    // let newColumnArray = columnArray.shift()
+    // newColumnArray.push(createBlock(4))
+    // console.log(newColumnArray)
+
+    // removeBlock(blockCurrentPositions)
+    // if (blockCurrentPositions + width < cellCount - 28) {
+    //   blockCurrentPositions += width      
+    // } else if (blockCurrentPositions === 58) {
+    //   if (key === q && blockClass === 'q') {
+    //     blockCurrentPositions -= 2
+    //     incrementBlocksBroken()
+    //   } else if (key === w && blockClass === 'w'){
+    //     blockCurrentPositions -= 2
+    //     incrementBlocksBroken()
+    //   } else if (key === e && blockClass === 'e') {
+    //     blockCurrentPositions -= 2
+    //     incrementBlocksBroken()
+    //   } else if (key === r && blockClass === 'r') {
+    //     blockCurrentPositions -= 2
+    //     incrementBlocksBroken()
+    //   } else {
+    //     blockCurrentPositions += width
+    //     incrementBlocksFailed()
+    //   }
+    // } else if (blockCurrentPositions === 56) {
+    //   blockCurrentPositions -= 2
+    // }
+    // addBlock(blockCurrentPositions)
+    // if (blockCurrentPositions === 54) {
+    //   removeBlock(blockCurrentPositions)
+    // }
     addCharacter2()
   }
 
