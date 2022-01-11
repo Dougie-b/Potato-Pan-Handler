@@ -15,9 +15,9 @@ function init (){
   const blockClass = blockClassArray[Math.floor(Math.random() * blockClassArray.length)] //maths to randomise the class selection
   const charClass = 'char' //character class
   const charClass2 = 'char2' 
-  const blockStartPosition = 4  // starting position of the block (refers to an index) Would like to start with the column filled
+  const blockStartPosition = 4 // starting position of the block (refers to an index) Would like to start with the column filled
   let blockCurrentPosition = 4 // use let to track where the block currently is (refers to an index)
-
+  const blockColumn = cells[4, 13, 22, 31, 40, 49, 58]
 
 
   function createGrid() {
@@ -27,11 +27,17 @@ function init (){
       grid.appendChild(cell) // make the cell a child of the grid element we grabbed above
       cells.push(cell) // add the newly created div into our empty array
     }
-    //createBlock()
-    addBlock(blockStartPosition)
+    createBlocks(4)
+    createBlocks(13)
+    createBlocks(22)
+    createBlocks(31)
+    createBlocks(40)
+    createBlocks(49)
+    createBlocks(58)
     addCharacter()
     createTimer()
     createBlocksBrokenCount()
+    
   }
 
   // timer function
@@ -72,12 +78,17 @@ function init (){
   }
 
 
-  // * Add block(mouse for now) to grid -- for moving blocks after spawn
+  // create & randomise blocks
+  function createBlocks(position) {
+    cells[position].classList.add(blockClassArray[Math.floor(Math.random() * blockClassArray.length)])
+  }
+
+  // Add block(mouse for now) to grid -- for moving blocks after spawn
   function addBlock (position) { // takes argument so function is reusable
     cells[position].classList.add(blockClass) // use position as index to pick the corresponding div from the array of cells and add the class of block
   }
 
-  // * Remove block(mouse for now) from the grid -- for moving blocks after spawn
+  // Remove block(mouse for now) from the grid -- for moving blocks after spawn
   function removeBlock(position) {
     cells[position].classList.remove(blockClass)
   }
@@ -85,7 +96,6 @@ function init (){
   // function to toggle in second character class & add a new block at the start position (tho not yet D:)
   function handleKeyDown() {
     addCharacter2()
-    addBlock(blockStartPosition)
   }
 
 
@@ -99,6 +109,7 @@ function init (){
     const w = 87
     const e = 69
     const r = 82
+
     removeBlock(blockCurrentPosition)
     if (blockCurrentPosition + width < cellCount - 28) {
       blockCurrentPosition += width
@@ -128,14 +139,14 @@ function init (){
     }
     removeCharacter()
     addCharacter()
-    console.log(blocksBroken)
+    createBlocks(4)
   }
 
 
   document.addEventListener('keyup', handleKeyUp) // listening for key press
   document.addEventListener('keydown', handleKeyDown)
   
-  createGrid(blockStartPosition) 
+  createGrid() 
 
 }
 
