@@ -7,7 +7,9 @@ function init (){
   const cellCount = width * height // define the number of cells on the grid
   const cells = [] // empty array to store our divs that we create 
   const blocksBrokenClass = 'blocksBroken'
+  const blocksFailedClass = 'blocksFailed'
   let blocksBroken = 0
+  let blocksFailed = 0
   const timerClass = 'timer'
   let seconds = 0
 
@@ -15,9 +17,11 @@ function init (){
   const blockClass = blockClassArray[Math.floor(Math.random() * blockClassArray.length)] //maths to randomise the class selection
   const charClass = 'char' //character class
   const charClass2 = 'char2' 
-  const blockStartPosition = 4 // starting position of the block (refers to an index) Would like to start with the column filled
+  // const blockStartPosition = 4 // starting position of the block (refers to an index) Would like to start with the column filled
   let blockCurrentPosition = 4 // use let to track where the block currently is (refers to an index)
-  const blockColumn = cells[4, 13, 22, 31, 40, 49, 58]
+  // let blockColumnPosition = 4 || 13 || 22 || 31 || 40 || 49 || 58 an attempt to make the block moving function handle all boxes
+  
+  // why does blockColumn not work for createBlocks? tried a few different things
 
 
   function createGrid() {
@@ -27,6 +31,7 @@ function init (){
       grid.appendChild(cell) // make the cell a child of the grid element we grabbed above
       cells.push(cell) // add the newly created div into our empty array
     }
+    // addBlock(blockStartPosition)
     createBlocks(4)
     createBlocks(13)
     createBlocks(22)
@@ -37,7 +42,7 @@ function init (){
     addCharacter()
     createTimer()
     createBlocksBrokenCount()
-    
+    createBlocksFailedCount()
   }
 
   // timer function
@@ -60,6 +65,16 @@ function init (){
   function incrementBlocksBroken(){
     blocksBroken += 1
     cells[17].innerText = blocksBroken
+  }
+
+  function createBlocksFailedCount() {
+    cells[26].classList.add(blocksFailedClass)
+    cells[26].innerText = blocksFailed
+  }
+
+  function incrementBlocksFailed(){
+    blocksFailed += 1
+    cells[26].innerText = blocksFailed
   }
 
   // function to spawn character
@@ -94,16 +109,7 @@ function init (){
   }
 
   // function to toggle in second character class & add a new block at the start position (tho not yet D:)
-  function handleKeyDown() {
-    addCharacter2()
-  }
-
-
-  // for (let i = 0; i < cars.length; i++) {
-  //   text += cars[i] + "<br>";
-  // }
-
-  function handleKeyUp(event) {
+  function handleKeyDown(event) {
     const key = event.keyCode // store the event.keyCode in a variable to save us repeatedly typing it out
     const q = 81
     const w = 87
@@ -129,6 +135,7 @@ function init (){
         incrementBlocksBroken()
       } else {
         blockCurrentPosition += width
+        incrementBlocksFailed()
       }
     } else if (blockCurrentPosition === 56) {
       blockCurrentPosition -= 2
@@ -137,9 +144,18 @@ function init (){
     if (blockCurrentPosition === 54) {
       removeBlock(blockCurrentPosition)
     }
+    addCharacter2()
+  }
+
+
+  // for (let i = 0; i < cars.length; i++) {
+  //   text += cars[i] + "<br>";
+  // }
+
+  function handleKeyUp() {
     removeCharacter()
     addCharacter()
-    createBlocks(4)
+    //createBlocks(4)
   }
 
 

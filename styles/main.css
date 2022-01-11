@@ -89,3 +89,11 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.grid div.blocksFailed {
+  display: flex;
+  background-color: grey;
+  color: orange;
+  justify-content: center;
+  align-items: center;
+}
