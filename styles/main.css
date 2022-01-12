@@ -65,7 +65,7 @@ body {
 
 .grid div.char {
   background-image: url('../assets/potato.png');
-  background-size: cover;
+  background-size: 2000%;
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
