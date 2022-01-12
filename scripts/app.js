@@ -32,7 +32,6 @@ function init (){
       grid.appendChild(cell) // make the cell a child of the grid element we grabbed above
       cells.push(cell) // add the newly created div into our empty array
     }
-    // addBlock(blockStartPosition)
     for (let i = 0; i < blockCurrentPositions.length; i++) {
       createBlock(blockCurrentPositions[i])
     }
@@ -105,6 +104,10 @@ function init (){
     cells[position].classList.remove(blockClass)
   }
 
+  function addRemoveBlock (position) {
+    cells[position] = cells[position] + width
+  }
+
 
   function handleKeyDown(event) {
     const key = event.keyCode // store the event.keyCode in a variable to save us repeatedly typing it out
@@ -118,15 +121,33 @@ function init (){
       return cells[position].classList.value
     })
     // const columnArray = [blockCurrentPositions.classList.value]
-    console.log(columnArray)
+    console.log('og columnArray -->', columnArray)
 
     // shift items down the array and put back to move down a row && make new block at top & push it to array (ARRAY LENGTHS MUST MATCH (columnArray/blockStartingPositions))
     // use foreach to update each element in the columnArray (pushing them down the array so they go down the rows on grid)
     // will need to push in a new createBlock randomiser value for cell 4
     // define function to move the final block depending on correct/incorrect input
-    console.log(blockCurrentPositions)
+    console.log('Block current positions -->', blockCurrentPositions)
     
+    function moveBlocks() {
+      const newColumnArray = columnArray.slice(-6)
+      for (let i = 0; i < blockCurrentPositions.length; i++) {
+        removeBlock(blockCurrentPositions[i])
+      }
+      //newColumnArray = newColumnArray.push('x')
+      console.log('new ColumnArray -->', newColumnArray)
+    }
+    moveBlocks()
 
+
+    // function moveSnake(squares) {
+    //   let tail = currentSnake.pop();
+    //   squares[tail].classList.remove("snake");
+    //   currentSnake.unshift(currentSnake[0] + direction);
+    //   // movement ends here
+    //   eatApple(squares, tail);
+    //   squares[currentSnake[0]].classList.add("snake");
+    // }
     // console.log(columnArray)
     // let newColumnArray = columnArray.shift()
     // newColumnArray.push(createBlock(4))

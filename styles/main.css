@@ -15,6 +15,9 @@ body {
 }
 
 .grid {
+  background-image: url('../assets/kitchen.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   align-items: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
   display: flex;
@@ -33,42 +36,44 @@ body {
 }
 
 .grid div.q {
-  background-image: url('../assets/Mr.Stealyourgirl.png');
+  background-image: url('../assets/bowl.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 
 .grid div.w {
-  background-image: url('../assets/Mr.Flipyourgirl.png');
+  background-image: url('../assets/frying-pan.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 
 .grid div.e {
-  background-color: red;
+  background-image: url('../assets/plate.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 
 .grid div.r {
-  background-color: blue;
+  background-image: url('../assets/skillet.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 
 .grid div.char {
-  background-image: url('../assets/character.png');
+  background-image: url('../assets/potato.png');
+  background-size: cover;
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 
 .grid div.char2 {
-  background-image: url('../assets/character-hit.png');
+  background-image: url('../assets/potato-hit.png');
+  background-size: cover;
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
