@@ -13,6 +13,7 @@ function init (){
   const timerClass = 'timer'
   let seconds = 0
   const audio = document.querySelector('#audio')
+  const backAudio = document.querySelector('#backAudio')
 
 
   const blockClassArray = ['q', 'w', 'e', 'r'] // array of block classes to randomly assign on spawn
@@ -55,9 +56,15 @@ function init (){
     cells[8].classList.add(timerClass)
   }
 
+  // music functions
   function failSound() {
     audio.src = ('assets/fail.wav')
     audio.play()
+  }
+  // Need to call in startgame when it's made
+  function backgroundSound() {
+    backAudio.src = ('assets/background-tune.wav')
+    backAudio.play()
   }
 
   // blocks broken counters
