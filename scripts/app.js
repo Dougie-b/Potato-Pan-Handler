@@ -52,6 +52,16 @@ function init (){
       createBlocksFailedCount()
     }
 
+    // start & end screen functions
+    function startGame() {
+      document.getElementById('startScreen').style.display = 'none'
+    }
+
+    function replay() {
+      document.getElementById('endScreen').style.display = 'none'
+    }
+
+
     // timer function
     function startTimer(){
       seconds += 1

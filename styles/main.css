@@ -27,7 +27,27 @@ body {
   background-color: black;
 }
 
+#endScreen {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 101;
+  height: 800px;
+  width: 800px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
 #startScreenStuff {
+  width: 400px;
+  height: 300px;
+  padding: 30px;
+  background-color: white;
+  margin: 80 auto;
+  text-align: center;
+}
+
+#endScreenStuff {
   width: 400px;
   height: 300px;
   padding: 30px;
