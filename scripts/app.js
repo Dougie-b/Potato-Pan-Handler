@@ -14,17 +14,9 @@ function init (){
   let seconds = 0
 
 
-
   const blockClassArray = ['q', 'w', 'e', 'r'] // array of block classes to randomly assign on spawn
-  const blockClass = blockClassArray[Math.floor(Math.random() * blockClassArray.length)] //maths to randomise the class selection
   const charClass = 'char' //character class
   const charClass2 = 'char2' 
-  // const blockStartPosition = 4 // starting position of the block (refers to an index) Would like to start with the column filled
-  const blockCurrentPositions = [58, 49, 40, 31, 22, 13, 4] // use let to track where the block currently is (refers to an index)
-  // let blockColumnPosition = 4 || 13 || 22 || 31 || 40 || 49 || 58 an attempt to make the block moving function handle all boxes
-  // const blockColumn = [cells[4], cells[13], cells[22], cells[31], cells[40], cells[49]]
-  const columnArray = []
-  // why does blockColumn not work for createBlocks? tried a few different things
   const blockClassPositions = [
     [58, randomBlock()],
     [49, randomBlock()],
@@ -43,7 +35,6 @@ function init (){
       cells.push(cell) // add the newly created div into our empty array
     }
     for (let i = 0; i < blockClassPositions.length; i++) {
-      console.log(blockClassPositions[i][0])
       createBlock(blockClassPositions[i][0])
     }
     addCharacter()
@@ -63,26 +54,26 @@ function init (){
     cells[8].classList.add(timerClass)
   }
 
-  // blocks broken correct counter
+  // blocks broken counters
   function createBlocksBrokenCount() {
     cells[17].classList.add(blocksBrokenClass)
     cells[17].innerText = blocksBroken
   }
 
-  // function incrementBlocksBroken(){
-  //   blocksBroken += 1
-  //   cells[17].innerText = blocksBroken
-  // }
+  function incrementBlocksBroken(){
+    blocksBroken += 1
+    cells[17].innerText = blocksBroken
+  }
 
   function createBlocksFailedCount() {
     cells[26].classList.add(blocksFailedClass)
     cells[26].innerText = blocksFailed
   }
 
-  // function incrementBlocksFailed(){
-  //   blocksFailed += 1
-  //   cells[26].innerText = blocksFailed
-  // }
+  function incrementBlocksFailed(){
+    blocksFailed += 1
+    cells[26].innerText = blocksFailed
+  }
 
   // function to spawn character
   function addCharacter() {
@@ -94,10 +85,13 @@ function init (){
     cells[59].classList.add(charClass2)
   }
 
+  // function to switch the image back to the original
   function removeCharacter() {
     cells[59].classList.remove(charClass)
     cells[59].classList.remove(charClass2)
   }
+
+  // function to randomly choose a class
   function randomBlock() {
     return blockClassArray[Math.floor(Math.random() * blockClassArray.length)]
   }
@@ -106,21 +100,6 @@ function init (){
   function createBlock(position) {
     cells[position].classList.add(randomBlock())
   }
-
-  // Add block(mouse for now) to grid -- for moving blocks after spawn
-  // function addBlock (position) { // takes argument so function is reusable
-  //   cells[position].classList.add(blockClass) // use position as index to pick the corresponding div from the array of cells and add the class of block
-  // }
-
-  // Remove block(mouse for now) from the grid -- for moving blocks after spawn
-  // function removeBlock(position) {
-  //   cells[position].classList.remove(blockClass)
-  // }
-
-  // function addRemoveBlock (position) {
-  //   cells[position] = cells[position] + width
-  // }
-
 
   function handleKeyDown(event) {
     const key = event.keyCode // store the event.keyCode in a variable to save us repeatedly typing it out
@@ -137,13 +116,25 @@ function init (){
       [13, null],
       [4, null]
     ]
-
+    // if statements for adding/losing points
+    if (key === r && cells[58].classList.value === 'r') {
+      incrementBlocksBroken()
+    } else if (key === q && cells[58].classList.value === 'q') {
+      incrementBlocksBroken()
+    } else if (key === w && cells[58].classList.value === 'w') {
+      incrementBlocksBroken()
+    } else if (key === e && cells[58].classList.value === 'e') {
+      incrementBlocksBroken()
+    } else incrementBlocksFailed()
+    
+    // function to make a copy of the original array and store it as oldArray
     function copyArray(arrayToCopy) {
       for (let i = 0; i < arrayToCopy.length; i++) {
         oldArray[i][1] = arrayToCopy[i][1]
       }
     }
 
+    // function to update the old array with the new array values (moving the blocks down one row)
     function updateBlock(oldArray, newArray) {
       for (let i = 0; i < oldArray.length; i++) {
         cells[oldArray[i][0]].classList.remove(oldArray[i][1])
@@ -151,111 +142,33 @@ function init (){
       }
     }
 
+    // make copy of the array before manipulating
     copyArray(blockClassPositions)
-    console.log('oldArray', oldArray)
-    // define an array of the classes in the blockCurrentPositions 
-    const columnArray = blockCurrentPositions.map(position => {
-      return cells[position].classList.value
-    })
     
-    // const columnArray = [blockCurrentPositions.classList.value]
-    console.log('og columnArray -->', columnArray)
-
-    // shift items down the array and put back to move down a row && make new block at top & push it to array (ARRAY LENGTHS MUST MATCH (columnArray/blockStartingPositions))
-    // use foreach to update each element in the columnArray (pushing them down the array so they go down the rows on grid)
-    // will need to push in a new createBlock randomiser value for cell 4
-    // define function to move the final block depending on correct/incorrect input
-    console.log('Block current positions -->', blockCurrentPositions)
-    
+    // function to loop through the positions of the array and shuffle them down one
     function moveBlocks() {
       for (let i = 1; i < blockClassPositions.length; i += 2) {
         blockClassPositions[i - 1][1] = blockClassPositions[i][1]
         blockClassPositions[i][1] = blockClassPositions[i + 1][1]
       } 
-      // console.log(blockClassPositions)
       addBlock(blockClassPositions, blockClassPositions.length - 1)
-      console.log(blockClassPositions)
     }
 
+    //function to add a new block to the array with a generated class
     function addBlock(arrayChange, position) {
       arrayChange[position][1] = randomBlock()
     }
-    
 
-    // function moveBlockPositions() {
-    //   for (let i = 1; i < blockCurrentPositions.length; i += 2) {
-    //     blockCurrentPositions[i - 1] = blockCurrentPositions[i]
-    //     console.log(i)
-    //     blockCurrentPositions[i] = blockCurrentPositions[i + 1]
-    //   } 
-    //   addBlock(blockCurrentPositions, blockCurrentPositions.length)
-    // }
+    // call both functions to move all of the blocks down a row and generate a new one in the first position
     moveBlocks()
     updateBlock(oldArray, blockClassPositions)
-  
-
-
-    //   const newColumnArray = columnArray.slice(-6)
-    //   for (let i = 0; i < blockCurrentPositions.length; i++) {
-    //     removeBlock(blockCurrentPositions[i])
-    //   }
-    //   //newColumnArray = newColumnArray.push('x')
-    //   console.log('new ColumnArray -->', newColumnArray)
-    // }
-    // moveBlocks()
-
-
-    // function moveSnake(squares) {
-    //   let tail = currentSnake.pop();
-    //   squares[tail].classList.remove("snake");
-    //   currentSnake.unshift(currentSnake[0] + direction);
-    //   // movement ends here
-    //   eatApple(squares, tail);
-    //   squares[currentSnake[0]].classList.add("snake");
-    // }
-    // console.log(columnArray)
-    // let newColumnArray = columnArray.shift()
-    // newColumnArray.push(createBlock(4))
-    // console.log(newColumnArray)
-
-    // removeBlock(blockCurrentPositions)
-    // if (blockCurrentPositions + width < cellCount - 28) {
-    //   blockCurrentPositions += width      
-    // } else if (blockCurrentPositions === 58) {
-    //   if (key === q && blockClass === 'q') {
-    //     blockCurrentPositions -= 2
-    //     incrementBlocksBroken()
-    //   } else if (key === w && blockClass === 'w'){
-    //     blockCurrentPositions -= 2
-    //     incrementBlocksBroken()
-    //   } else if (key === e && blockClass === 'e') {
-    //     blockCurrentPositions -= 2
-    //     incrementBlocksBroken()
-    //   } else if (key === r && blockClass === 'r') {
-    //     blockCurrentPositions -= 2
-    //     incrementBlocksBroken()
-    //   } else {
-    //     blockCurrentPositions += width
-    //     incrementBlocksFailed()
-    //   }
-    // } else if (blockCurrentPositions === 56) {
-    //   blockCurrentPositions -= 2
-    // }
-    // addBlock(blockCurrentPositions)
-    // if (blockCurrentPositions === 54) {
-    //   removeBlock(blockCurrentPositions)
-    // }
     addCharacter2()
   }
   
-  // for (let i = 0; i < cars.length; i++) {
-  //   text += cars[i] + "<br>";
-  // }
 
   function handleKeyUp() {
     removeCharacter()
     addCharacter()
-    //createBlocks(4)
   }
 
   document.addEventListener('keyup', handleKeyUp) // listening for key press
