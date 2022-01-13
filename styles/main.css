@@ -29,7 +29,7 @@ body {
 
 #endScreen {
   position: absolute;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 101;
@@ -137,9 +137,10 @@ body {
   color: red;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
-.grid div.blocksBroken {
+/* .grid div.blocksBroken {
   display: flex;
   background-color: royalblue;
   color: pink;
@@ -153,4 +154,4 @@ body {
   color: orange;
   justify-content: center;
   align-items: center;
-}
+} */

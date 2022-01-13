@@ -2,6 +2,19 @@ function init (){
 
   //Variables
   
+  // start & end screen functions
+  document.querySelector('#startButton').onclick = runGame()
+
+
+  function startGame() {
+    //document.getElementById('startScreen').style.display = 'none'
+
+  }
+  
+  function replay() {
+    document.getElementById('endScreen').style.display = 'none'
+  }
+
 
   function runGame() {
     const grid = document.querySelector('.grid') // get the grid element
@@ -9,17 +22,12 @@ function init (){
     const height = 10
     const cellCount = width * height // define the number of cells on the grid
     const cells = [] // empty array to store our divs that we create 
-    const blocksBrokenClass = 'blocksBroken'
-    const blocksFailedClass = 'blocksFailed'
     let blocksBroken = 0
     let blocksFailed = 0
     const timerClass = 'timer'
     let seconds = 0
     const audio = document.querySelector('#audio')
     const backAudio = document.querySelector('#backAudio')
-    
-
-
 
     const blockClassArray = ['q', 'w', 'e', 'r'] // array of block classes to randomly assign on spawn
     const charClass = 'char' //character class
@@ -45,27 +53,15 @@ function init (){
       for (let i = 0; i < blockClassPositions.length; i++) {
         createBlock(blockClassPositions[i][0])
       }
-      console.log(cells[58].classList.value)
       addCharacter()
       createTimer()
-      createBlocksBrokenCount()
-      createBlocksFailedCount()
-    }
-
-    // start & end screen functions
-    function startGame() {
-      document.getElementById('startScreen').style.display = 'none'
-    }
-
-    function replay() {
-      document.getElementById('endScreen').style.display = 'none'
     }
 
 
     // timer function
     function startTimer(){
       seconds += 1
-      cells[8].innerHTML = seconds
+      cells[8].innerHTML = 'Time Elapsed '  + seconds
     }
 
     function createTimer(){
@@ -86,19 +82,9 @@ function init (){
     }
 
     // blocks broken counters
-    function createBlocksBrokenCount() {
-      cells[17].classList.add(blocksBrokenClass)
-      cells[17].innerText = blocksBroken
-    }
-
     function incrementBlocksBroken(){
       blocksBroken += 1
       cells[17].innerText = blocksBroken
-    }
-
-    function createBlocksFailedCount() {
-      cells[26].classList.add(blocksFailedClass)
-      cells[26].innerText = blocksFailed
     }
 
     function incrementBlocksFailed(){
@@ -214,12 +200,6 @@ function init (){
     
     createGrid() 
   } 
-  
-  function startGame() {
-    document.getElementById('startScreen').style.display = 'none'
-    runGame()
-  }
-  document.querySelector('#startButton').onclick = startGame()
 }
 
 window.addEventListener('DOMContentLoaded', init)
