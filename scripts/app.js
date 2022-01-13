@@ -12,6 +12,7 @@ function init (){
   let blocksFailed = 0
   const timerClass = 'timer'
   let seconds = 0
+  const audio = document.querySelector('#audio')
 
 
   const blockClassArray = ['q', 'w', 'e', 'r'] // array of block classes to randomly assign on spawn
@@ -52,6 +53,11 @@ function init (){
   function createTimer(){
     setInterval(startTimer, 1000)
     cells[8].classList.add(timerClass)
+  }
+
+  function failSound() {
+    audio.src = ('assets/fail.wav')
+    audio.play()
   }
 
   // blocks broken counters
@@ -126,6 +132,7 @@ function init (){
     } else if (key === e && cells[58].classList.value === 'e') {
       incrementBlocksBroken()
     } else incrementBlocksFailed()
+    failSound()
     
     // function to make a copy of the original array and store it as oldArray
     function copyArray(arrayToCopy) {
