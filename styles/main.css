@@ -14,11 +14,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: cornflowerblue;
 }
 
 #startScreen {
   position: absolute;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 100;
@@ -72,7 +73,7 @@ body {
 .grid {
   background-image: url('../assets/kitchen.png');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 110%;
   align-items: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
   display: flex;
@@ -86,13 +87,15 @@ body {
 .grid div {
   flex-grow: 1;
   height: 10%;
-  width: 11.11111111% 
+  width: 11.11111111%;
+  text-align: center;
 }
 
 .grid div.q {
   background-image: url('../assets/bowl.png');
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
   cursor: pointer;
 }
 
@@ -100,6 +103,7 @@ body {
   background-image: url('../assets/frying-pan.png');
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
   cursor: pointer;
 }
 
@@ -107,6 +111,7 @@ body {
   background-image: url('../assets/plate.png');
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
   cursor: pointer;
 }
 
@@ -114,6 +119,7 @@ body {
   background-image: url('../assets/skillet.png');
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
   cursor: pointer;
 }
 
@@ -133,25 +139,9 @@ body {
 
 .grid div.timer {
   display: flex;
-  background-color: black;
-  color: red;
+  color: black;
   justify-content: center;
   align-items: center;
   text-align: center;
+  font-size: larger;
 }
-
-/* .grid div.blocksBroken {
-  display: flex;
-  background-color: royalblue;
-  color: pink;
-  justify-content: center;
-  align-items: center;
-}
-
-.grid div.blocksFailed {
-  display: flex;
-  background-color: grey;
-  color: orange;
-  justify-content: center;
-  align-items: center;
-} */

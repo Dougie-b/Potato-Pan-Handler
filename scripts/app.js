@@ -6,15 +6,14 @@ function init (){
   document.querySelector('#startButton').onclick = runGame()
 
 
-  function startGame() {
-    //document.getElementById('startScreen').style.display = 'none'
+  // function startGame() {
+  //   //document.getElementById('startScreen').style.display = 'none'
 
-  }
+  // }
   
-  function replay() {
-    document.getElementById('endScreen').style.display = 'none'
-  }
-
+  // function replay() {
+  //   document.getElementById('endScreen').style.display = 'none'
+  // }
 
   function runGame() {
     const grid = document.querySelector('.grid') // get the grid element
@@ -28,7 +27,6 @@ function init (){
     let seconds = 0
     const audio = document.querySelector('#audio')
     const backAudio = document.querySelector('#backAudio')
-
     const blockClassArray = ['q', 'w', 'e', 'r'] // array of block classes to randomly assign on spawn
     const charClass = 'char' //character class
     const charClass2 = 'char2' 
@@ -41,8 +39,7 @@ function init (){
       [13, randomBlock()],
       [4, randomBlock()]
     ] // array of arrays containing the index and the second element of each array will be the randomed
-    console.log('original blockClassPositions -->', blockClassPositions)
-    
+
     function createGrid() {
       for (let i = 0; i < cellCount; i++) { // for loop to run for every cell, in this case we want 100 cells
         const cell = document.createElement('div') // create the div
@@ -55,18 +52,30 @@ function init (){
       }
       addCharacter()
       createTimer()
+      createKey()
     }
 
+    function createKey() {
+      cells[75].classList.add('q')
+      cells[84].innerText = 'Press Q to break bowls!'
+      cells[76].classList.add('w')
+      cells[85].innerText = 'Press A to break pans!'
+      cells[77].classList.add('e')
+      cells[86].innerText = 'Press P to break plates!'
+      cells[78].classList.add('r')
+      cells[87].innerText = 'Press L to break skillets!'
+    }
 
     // timer function
     function startTimer(){
       seconds += 1
-      cells[8].innerHTML = 'Time Elapsed '  + seconds
+      cells[73].innerHTML = 'Time Elapsed '  + seconds
     }
 
     function createTimer(){
+      cells[73].innerHTML = 'Time Elapsed '  + seconds
       setInterval(startTimer, 1000)
-      cells[8].classList.add(timerClass)
+      cells[73].classList.add(timerClass)
     }
 
     // music functions
@@ -75,21 +84,27 @@ function init (){
       audio.volume = 0.05
       audio.play()
     }
+
+    function correctSound() {
+      audio.src = ('assets/correct.wav')
+      audio.volume = 0.05
+      audio.play()
+    }
+
     // Need to call in startgame when it's made
     function backgroundSound() {
       backAudio.src = ('assets/background-tune.wav')
+      backAudio.volume = 0.5
       backAudio.play()
     }
 
     // blocks broken counters
     function incrementBlocksBroken(){
       blocksBroken += 1
-      cells[17].innerText = blocksBroken
     }
 
     function incrementBlocksFailed(){
       blocksFailed += 1
-      cells[26].innerText = blocksFailed
     }
 
     // function to spawn character
@@ -138,12 +153,16 @@ function init (){
       // if statements for adding/losing points
       if (key === l && cells[58].classList.value === 'r') {
         incrementBlocksBroken()
+        correctSound()
       } else if (key === q && cells[58].classList.value === 'q') {
         incrementBlocksBroken()
+        correctSound()
       } else if (key === a && cells[58].classList.value === 'w') {
         incrementBlocksBroken()
+        correctSound()
       } else if (key === p && cells[58].classList.value === 'e') {
         incrementBlocksBroken()
+        correctSound()
       } else {
         incrementBlocksFailed()
         failSound()
@@ -185,10 +204,10 @@ function init (){
       moveBlocks()
       updateBlock(oldArray, blockClassPositions)
       addCharacter2()
-      console.log('oldArray -->', oldArray)
-      console.log('blockClassPositions -->', blockClassPositions)
+      backgroundSound()
+      console.log(blocksBroken, blocksFailed)
+      console.log(score)
     }
-    
 
     function handleKeyUp() {
       removeCharacter()
@@ -197,7 +216,6 @@ function init (){
 
     document.addEventListener('keyup', handleKeyUp) // listening for key press
     document.addEventListener('keydown', handleKeyDown)
-    
     createGrid() 
   } 
 }
