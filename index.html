@@ -2,15 +2,21 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Block breaker!</title>
+    <title>Potato Pan Handler</title>
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/app.js" charset="utf-8"></script>
   </head>
   <body>
     <audio id = 'audio'></audio>
     <audio id = 'backAudio'></audio>
-    <div id='container'>
-      <div class='grid'></div>
+    <div id = 'startScreen'>
+      <div id = 'startScreenStuff'>
+        <h1>Potato Pan Handler!</h1>
+        <div id = 'startButton' class = 'button' onclick = "runGame()">Start game!</div>
+      </div>
+    </div>
+    <div id = 'container'>
+      <div class = 'grid'></div>
     </div>
   </body>
 </html>
