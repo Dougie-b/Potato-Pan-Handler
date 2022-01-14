@@ -26,11 +26,11 @@ function init (){
     const timerClass = 'timer'
     let seconds = 0
     const audio = document.querySelector('#audio')
-    const backAudio = document.querySelector('#backAudio')
+    // const backAudio = document.querySelector('#backAudio')
     const blockClassArray = ['q', 'w', 'e', 'r'] // array of block classes to randomly assign on spawn
     const charClass = 'char' //character class
     const charClass2 = 'char2' 
-    let scoreText = document.querySelector('#endScreenText')
+    // let scoreText = document.querySelector('#endScreenText')
     const blockClassPositions = [
       [58, randomBlock()],
       [49, randomBlock()],
@@ -93,11 +93,11 @@ function init (){
     }
 
     // Need to call in startgame when it's made
-    function backgroundSound() {
-      backAudio.src = ('assets/background-tune.wav')
-      backAudio.volume = 0.5
-      backAudio.play()
-    }
+    // function backgroundSound() {
+    //   backAudio.src = ('assets/background-tune.wav')
+    //   backAudio.volume = 0.5
+    //   backAudio.play()
+    // }
 
     // blocks broken counters
     function incrementBlocksBroken(){
