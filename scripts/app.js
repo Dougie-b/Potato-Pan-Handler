@@ -7,7 +7,7 @@ function init (){
 
 
   // function startGame() {
-  //   //document.getElementById('startScreen').style.display = 'none'
+  //document.getElementById('startScreen').style.display = 'none'
 
   // }
   
@@ -30,6 +30,7 @@ function init (){
     const blockClassArray = ['q', 'w', 'e', 'r'] // array of block classes to randomly assign on spawn
     const charClass = 'char' //character class
     const charClass2 = 'char2' 
+    let scoreText = document.querySelector('#endScreenText')
     const blockClassPositions = [
       [58, randomBlock()],
       [49, randomBlock()],
@@ -148,7 +149,7 @@ function init (){
         [13, null],
         [4, null]
       ]
-      const score = blocksBroken * seconds
+      const score = Math.floor((blocksBroken * 1000) / seconds)
 
       // if statements for adding/losing points
       if (key === l && cells[58].classList.value === 'r') {
@@ -204,8 +205,8 @@ function init (){
       moveBlocks()
       updateBlock(oldArray, blockClassPositions)
       addCharacter2()
-      backgroundSound()
       console.log(blocksBroken, blocksFailed)
+      score.innerText = Math.floor((blocksBroken * 10) / seconds)
       console.log(score)
     }
 
