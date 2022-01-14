@@ -6,6 +6,7 @@ function init (){
   const startButton = document.querySelector('#startButton')
   const backAudio = document.querySelector('#backAudio')
   const restartButton = document.querySelector('#restartButton')
+  let intervalStop = null
 
   startButton.addEventListener('click', startGame)
   restartButton.addEventListener('click', replay)
@@ -95,13 +96,9 @@ function init (){
       cells[73].innerHTML = 'Time Elapsed '  + seconds
     }
 
-    function stopTimer() {
-      clearInterval(startTimer)
-    }
-
     function createTimer(){
       cells[73].innerHTML = 'Time Elapsed '  + seconds
-      setInterval(startTimer, 1000)
+      intervalStop = setInterval(startTimer, 1000)
       cells[73].classList.add(timerClass)
     }
 
@@ -227,7 +224,7 @@ function init (){
         updateBlock(oldArray, blockClassPositions)
         addCharacter2()
       } else {
-        stopTimer()
+        clearInterval(intervalStop)
         document.getElementById('endScreenText').innerHTML = score
         endGame()
       }
