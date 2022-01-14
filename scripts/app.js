@@ -18,7 +18,7 @@ function init (){
   
   function backgroundSound() {
     backAudio.src = ('assets/background-tune.wav')
-    backAudio.volume = 0.5
+    backAudio.volume = 0.2
     backAudio.play()
   }
 
