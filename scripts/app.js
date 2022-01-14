@@ -3,17 +3,33 @@ function init (){
   //Variables
   
   // start & end screen functions
-  document.querySelector('#startButton').onclick = runGame()
+  const startButton = document.querySelector('#startButton')
+  const backAudio = document.querySelector('#backAudio')
+  const restartButton = document.querySelector('#restartButton')
 
+  startButton.addEventListener('click', startGame)
+  restartButton.addEventListener('click', replay)
 
-  // function startGame() {
-  //document.getElementById('startScreen').style.display = 'none'
-
-  // }
+  function startGame() {
+    document.getElementById('startScreen').style.display = 'none'
+    backgroundSound()
+    runGame()
+  }
   
-  // function replay() {
-  //   document.getElementById('endScreen').style.display = 'none'
-  // }
+  function backgroundSound() {
+    backAudio.src = ('assets/background-tune.wav')
+    backAudio.volume = 0.5
+    backAudio.play()
+  }
+
+  function replay() {
+    document.getElementById('endScreen').style.display = 'none'
+    location.reload()
+  }
+
+  function endGame() {
+    document.getElementById('endScreen').style.display = 'flex'
+  }
 
   function runGame() {
     const grid = document.querySelector('.grid') // get the grid element
@@ -26,11 +42,9 @@ function init (){
     const timerClass = 'timer'
     let seconds = 0
     const audio = document.querySelector('#audio')
-    // const backAudio = document.querySelector('#backAudio')
     const blockClassArray = ['q', 'w', 'e', 'r'] // array of block classes to randomly assign on spawn
     const charClass = 'char' //character class
     const charClass2 = 'char2' 
-    // let scoreText = document.querySelector('#endScreenText')
     const blockClassPositions = [
       [58, randomBlock()],
       [49, randomBlock()],
@@ -91,13 +105,6 @@ function init (){
       audio.volume = 0.05
       audio.play()
     }
-
-    // Need to call in startgame when it's made
-    // function backgroundSound() {
-    //   backAudio.src = ('assets/background-tune.wav')
-    //   backAudio.volume = 0.5
-    //   backAudio.play()
-    // }
 
     // blocks broken counters
     function incrementBlocksBroken(){
@@ -202,12 +209,14 @@ function init (){
       }
 
       // call both functions to move all of the blocks down a row and generate a new one in the first position
-      moveBlocks()
-      updateBlock(oldArray, blockClassPositions)
-      addCharacter2()
-      console.log(blocksBroken, blocksFailed)
-      score.innerText = Math.floor((blocksBroken * 10) / seconds)
-      console.log(score)
+      if (blocksBroken + blocksFailed <= 50) {
+        moveBlocks()
+        updateBlock(oldArray, blockClassPositions)
+        addCharacter2()
+      } else {
+        document.getElementById('endScreenText').innerHTML = score
+        endGame()
+      }
     }
 
     function handleKeyUp() {
