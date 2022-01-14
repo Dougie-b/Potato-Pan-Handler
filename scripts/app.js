@@ -149,7 +149,7 @@ function init (){
         [13, null],
         [4, null]
       ]
-      const score = Math.floor((blocksBroken * 1000) / seconds)
+      const score = Math.floor(((blocksBroken - blocksFailed) * 500) / (seconds))
 
       // if statements for adding/losing points
       if (key === l && cells[58].classList.value === 'r') {
