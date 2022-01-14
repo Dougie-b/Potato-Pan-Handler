@@ -17,6 +17,14 @@ function init (){
   }
   
   function backgroundSound() {
+    const loops = 5
+    let count = 0
+    backAudio.onended = function() {
+      if (count <= loops){
+        count++
+        this.play()
+      }
+    }
     backAudio.src = ('assets/background-tune.wav')
     backAudio.volume = 0.2
     backAudio.play()
@@ -85,6 +93,10 @@ function init (){
     function startTimer(){
       seconds += 1
       cells[73].innerHTML = 'Time Elapsed '  + seconds
+    }
+
+    function stopTimer() {
+      clearInterval(startTimer)
     }
 
     function createTimer(){
@@ -159,22 +171,7 @@ function init (){
       const score = Math.floor(((blocksBroken - blocksFailed) * 500) / (seconds))
 
       // if statements for adding/losing points
-      if (key === l && cells[58].classList.value === 'r') {
-        incrementBlocksBroken()
-        correctSound()
-      } else if (key === q && cells[58].classList.value === 'q') {
-        incrementBlocksBroken()
-        correctSound()
-      } else if (key === a && cells[58].classList.value === 'w') {
-        incrementBlocksBroken()
-        correctSound()
-      } else if (key === p && cells[58].classList.value === 'e') {
-        incrementBlocksBroken()
-        correctSound()
-      } else {
-        incrementBlocksFailed()
-        failSound()
-      }
+      
       
       // function to make a copy of the original array and store it as oldArray
       function copyArray(arrayToCopy) {
@@ -210,10 +207,27 @@ function init (){
 
       // call both functions to move all of the blocks down a row and generate a new one in the first position
       if (blocksBroken + blocksFailed <= 50) {
+        if (key === l && cells[58].classList.value === 'r') {
+          incrementBlocksBroken()
+          correctSound()
+        } else if (key === q && cells[58].classList.value === 'q') {
+          incrementBlocksBroken()
+          correctSound()
+        } else if (key === a && cells[58].classList.value === 'w') {
+          incrementBlocksBroken()
+          correctSound()
+        } else if (key === p && cells[58].classList.value === 'e') {
+          incrementBlocksBroken()
+          correctSound()
+        } else {
+          incrementBlocksFailed()
+          failSound()
+        }
         moveBlocks()
         updateBlock(oldArray, blockClassPositions)
         addCharacter2()
       } else {
+        stopTimer()
         document.getElementById('endScreenText').innerHTML = score
         endGame()
       }
